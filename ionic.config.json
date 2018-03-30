@@ -1,0 +1,22 @@
+{
+  "name": "ParisOuvert",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  },
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://parisouvert.com/api.php/"
+    },
+    {
+      "path": "/services",
+      "proxyUrl": "http://parisouvert.com/api.php/espacevert_service"
+    },
+    {
+      "path": "/aDj",
+      "proxyUrl": "http://parisouvert.com/api-test.php"
+    }
+  ]
+}
