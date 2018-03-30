@@ -19,23 +19,37 @@ const express  = require('express'),
     });
 
     //Set up proxies
-    app.get('/api/*', function(req,res) {
+    app.get('/api/*', cors(), function(req,res) {
         const params = req.url.slice('/api/'.length);
         request(`https://parisouvert.com/api.php/${params}`).pipe(res);
     });
 
-    app.get('/service', function(req,res) {
+    app.get('/service', cors(), function(req,res) {
         const params = req.url.slice('/service'.length);
         request(`https://parisouvert.com/api.php/espacevert_service${params}`).pipe(res);
     });
 
-    app.get('/aDj', function(req,res) {
+    app.get('/aDj', cors(), function(req,res) {
+        request('https://parisouvert.com/api-test.php').pipe(res);
+    });
+
+    app.options('/api/*', cors(), function(req,res) {
+        const params = req.url.slice('/api/'.length);
+        request(`https://parisouvert.com/api.php/${params}`).pipe(res);
+    });
+
+    app.options('/service', cors(), function(req,res) {
+        const params = req.url.slice('/service'.length);
+        request(`https://parisouvert.com/api.php/espacevert_service${params}`).pipe(res);
+    });
+
+    app.options('/aDj', cors(), function(req,res) {
         request('https://parisouvert.com/api-test.php').pipe(res);
     });
     
     app.use(express.static('www'));
 
     app.set('port', process.env.PORT || 5000);
-    app.listen(app.get('port'), '0.0.0.0', function () {
+    app.listen(app.get('port'), function () {
         console.log('Express server listening on port ' + app.get('port'));
     });
