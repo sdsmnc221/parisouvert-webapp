@@ -1,0 +1,135 @@
+<ion-content *ngIf="ev; else loading">
+        <div class="filter-container">
+            <ion-icon class="icon-retour" name="arrow-round-back" (click)="goBack()"></ion-icon>
+            <h1> {{ev.name}} </h1>
+        </div>
+    
+        <div class="main">
+                <div class="slide_container">
+            <ion-slides *ngIf="ev.photos; else defaultImg">
+                <ion-slide *ngFor="let photo of ev.photos">
+                   
+                    <img src="{{photo.url}}" alt="{{photo.caption}}">
+                
+                </ion-slide>
+            </ion-slides>
+        </div>
+
+
+            <!-- IMPORTANT: show slide with default img if EV don't have any photo -->
+            
+            <ng-template #defaultImg>
+                    <div class="slide_container">
+                <ion-slides>
+                    <ion-slide>
+                        <img src="assets/imgs/fauxparc.jpg" alt="">
+                    </ion-slide>
+                </ion-slides>
+            </div>
+            </ng-template>
+       
+            <!-- END conditional slide -->
+    
+            <div class="categorie-acces">
+                <h2>Adresse</h2>
+                <p class="categorie-acces__text" *ngIf="completedAddress; else dbAddress">{{completedAddress}}</p>
+                <ng-template #dbAddress>
+                    <p class="categorie-acces__text">{{ev.address.address}} {{ev.address.postalCode}} {{ev.address.city}}</p>
+                </ng-template>
+                <br>
+                <button block ion-button (click)="toMap()">Voir sur le plan</button>
+            </div>
+    
+            <!-- <div class="categorie-horaires" (click)="toggleVisible()">
+                <h2>Horaires</h2>
+                <p class="horaires__text">Samedi : 8H - 20H
+                    <ion-icon class="icon-dropdown" name="arrow-dropdown"></ion-icon>
+                </p>
+    
+                <div id="hidden" style="display:none;">
+                    <div class="horaires-container">
+                        <div class="horaires__jours">
+                            Lundi <br /> Mardi <br /> Mercredi <br /> Jeudi <br /> Vendredi <br /> Samedi <br /> Dimanche <br />
+                        </div>
+                        <div class="horaires__ligne"></div>
+                        <div class="horaires__heures">
+                            8H - 20H <br /> 8H - 20H <br /> 8H - 20H <br /> 8H - 20H <br /> 8H - 20H <br /> 8H - 20H <br /> 8H - 20H <br />
+                        </div>
+                    </div>
+                </div>
+    
+            </div> -->
+    
+            <div class="categorie-services">
+                <h2>Services</h2>
+                <ul *ngIf="ev.services; else noService">
+                    <li *ngFor="let service of ev.services">{{service.name}} <i *ngIf="service.name === 'Handicap' && service.description">({{service.description}})</i></li>
+                </ul>
+    
+                <!-- IMPORTANT: show noService EV don't have any service -->
+                <ng-template #noService>
+                    <p class="services__text"><i>Non renseignés</i></p>
+                </ng-template>
+                <!-- End of conditional noService -->
+            </div>
+    
+            <div class="categorie-description">
+                <h2>Description</h2>
+                <p *ngIf="ev.superficie"><strong>Superficie : </strong>{{ev.superficie}} Ha.</p>
+                <div class="descrip">
+                    <p *ngIf="ev.description; else noDescription">{{ev.description}}</p>
+                </div>
+    
+                <!-- IMPORTANT: show noDescription EV don't have any description -->
+                <ng-template #noDescription>
+                    <p class="description__text"><i>Non renseignée</i></p>
+                </ng-template>
+                <!-- End of conditional noDescription -->
+            </div>
+    
+            <div class="categorie-medias">
+                <h2>Médias</h2>
+    
+                <div class="medias__images" *ngIf="ev.photos; else noMedia">
+                    <img *ngFor="let photo of ev.photos" src="{{photo.url}}" alt="{{photo.caption}}" class="carre">
+                </div>
+                <!-- IMPORTANT: show noMedia EV don't have any photo -->
+                <ng-template #noMedia>
+                    <div class="medias__images">
+                        <p class="medias__text"><i>Pas d'image disponible</i></p>
+                    </div>
+                </ng-template>
+                <!-- End of conditional noMedia -->
+                <button ion-button block (click)="partageFacebook()" id="partage" class="partage">Partager ce parc à vos amis !</button>
+            </div>
+    
+    
+            <div class="categorie-avis">
+                <h2>Avis</h2>
+                <hr>
+                <div class="avis">
+                    
+                    <h3 (click)="appel()"><ion-icon class="icon-ecrire" name="create"></ion-icon>    Écrire un avis</h3>
+                
+                </div>
+    
+                <div id="insertion">
+    
+                </div>
+    
+                <button block ion-button (click)="commentaires()" id="voircomms" class="voircomms">Voir les commentaires</button>
+            </div>
+    
+        </div>
+    </ion-content>
+    
+    <ng-template #loading>
+            <div class="quiver">
+                    <span class="arrows st"></span>
+                    <span class="arrows nd"></span>
+                    <span class="arrows rd"></span>
+                    <span class="arrows th"></span>
+                    <span class="arrows fth"></span>
+                    <span class="loading">En cours de chargement...</span>
+              </div>
+    </ng-template>

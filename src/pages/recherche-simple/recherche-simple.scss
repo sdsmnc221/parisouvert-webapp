@@ -1,0 +1,74 @@
+page-recherche-simple {
+
+
+    main {
+        background-color: white;
+        height: 75vh;
+    }
+
+    .fond-loupe {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    .onglet {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    div[class^="onglet_"] {
+        display: flex;
+        font-weight: 100;
+        margin: 0;
+        padding: 5px;
+        background-color: #68D7A5;
+        color: white;
+        font-family: 'Dosis-SemiBold', sans-serif;
+        font-size: 1.5rem;
+        width: 50%;
+        justify-content: center;
+    }
+
+    div[class^="onglet_"]:first-of-type {
+        border-bottom: solid 3px #00A75B;
+        font-weight: 900;
+    }
+
+    .item-md {
+        padding: 0 !important;
+    }
+
+    form {
+        padding: 20px;
+        display: block;
+        color: #D8D8D8;
+    }
+
+    input {
+        border: none;
+        border-bottom: solid 1px #B3B3B3;
+        height: 20px;
+        width: 225px;
+        margin: 10px;
+        font-family: 'Lato', sans-serif;
+    }
+
+    .text-input-md {
+        margin: 0 !important;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    button[type="submit"] {
+        font-size: 1.5rem !important;
+    }
+
+    ion-icon {
+        font-size:  6rem;
+        color: #1EBA73;
+    }
+}

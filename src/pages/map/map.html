@@ -1,0 +1,15 @@
+<ion-content>
+  <div class="header" *ngIf="ev; else noEV">
+      <ion-icon class="icon-retour" name="arrow-round-back" (click)="goBack()"></ion-icon>
+      <h1> {{ev.name}} </h1>
+  </div>
+  <ng-template #noEV>
+      <ion-icon class="icon-retour" name="arrow-round-back" (click)="goBack()"></ion-icon>
+    <div class="header">
+    </div>
+  </ng-template>
+  
+  <div #mapCanvas id="map-canvas">
+  </div>
+
+</ion-content>

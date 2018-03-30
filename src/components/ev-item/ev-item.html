@@ -1,0 +1,40 @@
+<div class="element" (click)="toEV()">
+
+        <div class="element__photo">
+              <img *ngIf="ev.photo; else defaultImg" src="{{ev.photo.url}}" alt="{{ev.name}}">
+  
+              <ng-template #defaultImg>
+                          <img src="assets/imgs/parc.jpg" alt="">
+              </ng-template>
+        </div>
+  
+        <div class="element__infos">
+              <h2>{{ev.name}}  </h2>
+  
+              <p class="element__infos__adresse" *ngIf="completedAddress; else dbAddress">{{completedAddress}}</p>
+              
+              <ng-template #dbAddress>
+                    <p class="element__infos__adresse">{{ev.address.address}} {{ev.address.postalCode}} {{ev.address.city}}</p>
+              </ng-template>
+  
+              <!-- <div class="element__infos__notation">   
+                    <ion-icon class="icon-etoile" name="star-outline" ></ion-icon>
+                    <ion-icon class="icon-etoile" name="star-outline" ></ion-icon>
+                    <ion-icon class="icon-etoile" name="star-outline" ></ion-icon>
+                    <ion-icon class="icon-etoile" name="star-outline" ></ion-icon>
+                    <ion-icon class="icon-etoile" name="star-outline" ></ion-icon>
+              </div> -->
+  
+              <div class="element__infos__ligne" *ngIf="distanceFromCurrentPosition">
+                    <ion-icon class="icon-localisation" name="pin"></ion-icon><span> {{distanceFromCurrentPosition}} Km</span>
+              </div>
+  
+              <!-- <div class="element__infos__ligne">
+                    <ion-icon class="icon-horloge" name="time"></ion-icon><span class="ouvert"> Ouvert</span>
+              </div> -->
+  
+        </div>
+        
+        <!-- <ion-icon class="icon-coeur" name="heart-outline" ></ion-icon> -->
+  
+  </div>

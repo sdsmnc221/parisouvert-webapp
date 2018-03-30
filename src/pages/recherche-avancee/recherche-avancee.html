@@ -1,0 +1,118 @@
+<ion-content>
+
+    <header class="fond-loupe">
+        <img src="assets/imgs/Fichier%201hdpi.png" alt="">
+    </header>
+
+
+    <main>
+
+        <div class="onglet">
+            <DIV class="onglet_simple" (click)="toSimpleSearch()">
+                RECHERCHE SIMPLE
+            </DIV>
+            <DIV class="onglet_simple" (click)="toAdvancedSearch()">
+                RECHERCHE AVANCÉE
+            </DIV>
+        </div>
+
+        <form #advancedSearch="ngForm" (ngSubmit)="validator()">
+
+            <ion-item>
+                <ion-input type="search" name="keywords" placeholder="Je saisis mes mots clés..." [(ngModel)]="searchParams.keyword"></ion-input>
+            </ion-item>
+
+            <fieldset>
+                <h1>Trier par</h1>
+                <p><em>(Pertinence > Superficie > AZ)</em></p>
+
+                <ion-item>
+                    <ion-label for="pertinence">Pertinence</ion-label>
+                    <ion-checkbox id="pertinence" name="pertinence" [(ngModel)]="searchParams.orderBy.pertinence"></ion-checkbox>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label for="az">Ordre alphabétique</ion-label>
+                    <ion-checkbox id="az" name="az" [(ngModel)]="searchParams.orderBy.az"></ion-checkbox>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label for="popularity">Les plus visités</ion-label>
+                    <ion-checkbox id="popularity" name="popularity" disabled [(ngModel)]="searchParams.orderBy.popularity"></ion-checkbox>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label for="servicesCount">Services & Activités</ion-label>
+                    <ion-checkbox id="servicesCount" name="servicesCount" disabled></ion-checkbox>
+                </ion-item>
+                    
+
+                <ion-item>
+                    <ion-label for="superficie">Superficie</ion-label>
+                    <ion-select id="superficie" name="superficie" [(ngModel)]="searchParams.orderBy.superficie" cancelText="Annuler">
+                        <ion-option *ngFor="let opt of opts.superficie" value="{{opt.value}}" disabled="{{opt.disabled}}">{{opt.name}}</ion-option>
+                    </ion-select>
+                </ion-item>
+            </fieldset>
+
+            <fieldset>
+                <h1>Filtrer par</h1>
+
+                <ion-item>
+                    <ion-label for="distance">Distance</ion-label>
+                    <ion-select id="distance" name="distance" [(ngModel)]="searchParams.filterBy.distance" cancelText="Annuler">
+                        <ion-option *ngFor="let opt of opts.distance" value="{{opt.value}}" disabled="{{opt.disabled}}">{{opt.name}}</ion-option>
+                    </ion-select>
+                </ion-item>
+
+                <!-- Champs input pour Distance si l'utilisateur choisit Autres/4 -->
+                <ion-item *ngIf="searchParams.filterBy.distance === '4'" class="no-border">
+                        <ion-input type="text" name="userInputLocation" minlength="1" required id="userInputLocation" placeholder="Une rue, un arrondissement, etc." [(ngModel)]="searchParams.userInputLocation"></ion-input>
+                </ion-item>
+
+                <!-- Si le formulaire n'est pas valide -->
+                <!-- <div *ngIf="!isFormValid.userInputLocation">Ah ouais... Pourquoi je choisis Autres mais je ne precise pas c'est quoi Autres...?</div> -->
+
+                <ion-item>
+                    <ion-label for="disponibility">Disponibilité :</ion-label>
+                    <ion-select id="disponibility" name="disponibility" disabled [(ngModel)]="searchParams.filterBy.disponibility" cancelText="Annuler">
+                        <ion-option *ngFor="let opt of opts.disponibility" value="{{opt.value}}" disabled="{{opt.disabled}}">{{opt.name}}</ion-option>
+                    </ion-select>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label for="types">Type(s)</ion-label>
+                    <ion-select id="types" name="types" multiple="true" [(ngModel)]="searchParams.filterBy.types" cancelText="Annuler">
+                        <ion-option *ngFor="let opt of opts.types" value="{{opt.value}}" disabled="{{opt.disabled}}">{{opt.name}}</ion-option>
+                    </ion-select>
+                </ion-item>
+
+                 <!-- Si le formulaire n'est pas valide -->
+                 <div *ngIf="!isFormValid.typesChoices" class="error">Ah ouais... Pourquoi je choisis <em>Tous</em> mais je choisis quand même les autres options...?</div>
+
+                <ion-item>
+                    <ion-label for="services">Service(s)</ion-label>
+                    <ion-select id="services" name="services" multiple="true" [(ngModel)]="searchParams.filterBy.services" cancelText="Annuler">
+                        <ion-option *ngFor="let opt of opts.services" value="{{opt.value}}" disabled="{{opt.disabled}}">{{opt.name}}</ion-option>
+                    </ion-select>
+                </ion-item>
+
+                 <!-- Si le formulaire n'est pas valide -->
+                 <div *ngIf="!isFormValid.servicesChoices" class="error">Ah ouais... Pourquoi je choisis <em>Autres</em> mais sans préciser ce que c'est <em>Autres</em>...?</div>
+
+                 <ion-item>
+                    <ion-label for="filterStrictMode">J'applique le filtrage strict</ion-label>
+                    <ion-checkbox id="filterStrictMode" name="filterStrictMode" [disabled]="helpers.checkIfAllChecked(searchParams)" [checked]="!helpers.checkIfAllChecked(searchParams)" [(ngModel)]="searchParams.filterStrictMode"></ion-checkbox>
+                </ion-item>
+
+                <div *ngIf="helpers.checkIfAllChecked(searchParams)" class="error">Le mode strict ne peut pas être appliqué, parce qu'évidemment il n'y a aucun parc qui propose tous les services et/ou qui ait comme type tous les types.</div>
+            </fieldset>
+
+            <ion-item class="controller">
+                <button ion-button (click)="eraseParams(); $event.preventDefault()">Recommencer...</button>
+                <button ion-button type="submit" [disabled]="!advancedSearch.form.valid">Valider !</button>
+            </ion-item>
+        </form>
+    </main>
+
+</ion-content>

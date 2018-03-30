@@ -1,0 +1,127 @@
+
+page-recherche-avancee {
+
+    main {
+        background-color: white;
+        height: 75vh;
+    }
+
+    .fond-loupe {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    .onglet {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    div[class^="onglet_"] {
+        display: flex;
+        font-weight: 100;
+        margin: 0;
+        padding: 5px;
+        background-color: #68D7A5;
+        color: white;
+        font-family: 'Dosis-SemiBold', sans-serif;
+        font-size: 1.5rem;
+        width: 50%;
+        justify-content: center;
+    }
+
+    div[class^="onglet_"]:last-of-type {
+        border-bottom: solid 3px #00A75B;
+        font-weight: 900;
+    }
+
+    form {
+        padding: 20px;
+        display: block;
+        background-color: #fff;
+    }
+
+    ion-item {
+        padding: 0 !important;
+        border-bottom: 1px solid #dedede !important; 
+
+        &.controller {
+            margin-top: 25px;
+            margin-bottom: 60px;
+            border: none !important;
+            .item-inner {
+                border: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            ion-label {
+                margin: 0 !important;
+                display: flex !important;
+                justify-content: space-between;
+            }
+            button {
+                width: 45%;
+                height: 30px !important;
+                font-size: 1.3rem !important;
+            }
+        }
+    }
+
+    fieldset {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border: none;
+        margin: 20px 0;
+        padding: 0;
+    }
+
+   h1 {
+        color : #3FC689;
+        margin: 0;
+        font-size: 2.2rem;
+        font-family: 'Dosis-SemiBold', sans-serif;
+        font-weight: 100;
+    }
+
+    .select-text {
+        width: 80px;
+    }
+
+    .no-border {
+        .item-inner {
+            border: none !important;
+        }
+
+        .text-input-md {
+            margin: 10px !important;
+        }
+    }
+
+    .item-checkbox, .item-select {
+        padding: 0 !important;
+        ion-checkbox {
+            margin: 9px 4px 9px 36px !important;
+            order: 99 !important;
+        }
+        .item-inner {
+            order: 1 !important;
+            border: none !important;
+        }
+        ion-label {
+            margin-left: 10px !important;
+            color: #000 !important;
+        }
+    }
+
+    .error {
+        margin: 5px;
+        margin-top: 10px;
+        color: #D32F2F;
+        text-align: center;
+        font-size: 1.2rem;
+        font-style: italic;
+    }
+
+}

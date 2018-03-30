@@ -1,0 +1,42 @@
+<ion-content *ngIf="EVs && evIds">
+      <div class="filter-container">
+            <h1>{{title}}</h1>
+            <ion-icon class="icon-filtrer" name="options" (click)="goToFilter()"></ion-icon>
+      </div>
+
+      <div *ngIf="EVs.length === 0 || !hasResult; else content">
+            <div class="quiver" *ngIf="evIds.length > 0; else noEVItems">
+                  <span class="arrows st"></span>
+                  <span class="arrows nd"></span>
+                  <span class="arrows rd"></span>
+                  <span class="arrows th"></span>
+                  <span class="arrows fth"></span>
+                  <span class="loading">En cours de chargement...</span>
+            </div>
+          
+            <ng-template #noEVItems>
+                  <div class="error">
+                        <p>Il n'y a aucun espace vert correspondant à votre recherche.</p>
+                        <button ion-button block (click)="goBack()">Je retourne à la page de recherche.</button>
+                  </div>
+            </ng-template>
+      </div>
+      
+      
+      <ng-template #content>
+            <ion-list>
+                  <ev-item *ngFor="let ev of EVs" [ev]="ev"></ev-item>
+            </ion-list>
+            
+            <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+                  <ion-infinite-scroll-content
+                  loadingSpinner="bubbles"
+                  loadingText="Espaces verts oh mon dieu espaces verts...">
+                  </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+      </ng-template>
+
+</ion-content>
+  
+  
+  
