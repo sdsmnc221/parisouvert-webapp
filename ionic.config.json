@@ -8,15 +8,15 @@
   "proxies": [
     {
       "path": "/api",
-      "proxyUrl": "http://parisouvert.com/api.php/"
+      "proxyUrl": "https://parisouvert.com/api.php/"
     },
     {
       "path": "/services",
-      "proxyUrl": "http://parisouvert.com/api.php/espacevert_service"
+      "proxyUrl": "https://parisouvert.com/api.php/espacevert_service"
     },
     {
       "path": "/aDj",
-      "proxyUrl": "http://parisouvert.com/api-test.php"
+      "proxyUrl": "https://parisouvert.com/api-test.php"
     }
   ]
 }
