@@ -17,6 +17,7 @@ const express  = require('express'),
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         next();
     });
+    app.options('*', cors())
 
     //Set up proxies
     app.get('/api/*', cors(), function(req,res) {
@@ -33,20 +34,6 @@ const express  = require('express'),
         request('https://parisouvert.com/api-test.php').pipe(res);
     });
 
-    app.options('/api/*', cors(), function(req,res) {
-        const params = req.url.slice('/api/'.length);
-        request(`https://parisouvert.com/api.php/${params}`).pipe(res);
-    });
-
-    app.options('/service', cors(), function(req,res) {
-        const params = req.url.slice('/service'.length);
-        request(`https://parisouvert.com/api.php/espacevert_service${params}`).pipe(res);
-    });
-
-    app.options('/aDj', cors(), function(req,res) {
-        request('https://parisouvert.com/api-test.php').pipe(res);
-    });
-    
     app.use(express.static('www'));
 
     app.set('port', process.env.PORT || 5000);
